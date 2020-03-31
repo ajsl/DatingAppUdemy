@@ -1,11 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
-import { TabsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 
 import { AppComponent } from './app.component';
@@ -26,12 +25,22 @@ import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
 }
 
-@NgModule({
+export class CustomHammerConfig extends HammerGestureConfig  {
+    overrides = {
+        pinch: { enable: false },
+        rotate: { enable: false }
+    };
+ }
+
+@ NgModule({
    declarations: [
       AppComponent,
       NavComponent,
@@ -41,7 +50,8 @@ export function tokenGetter() {
       MemberCardComponent,
       MemberDetailComponent,
       ListsComponent,
-      MessagesComponent
+      MessagesComponent,
+      MemberEditComponent
    ],
    imports: [
       BrowserModule,
@@ -67,7 +77,10 @@ export function tokenGetter() {
       MemberListResolver,
       AlertifyService,
       AuthGuard,
-      UserService
+      UserService,
+      MemberEditResolver,
+      PreventUnsavedChanges,
+      { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],
    bootstrap: [
       AppComponent

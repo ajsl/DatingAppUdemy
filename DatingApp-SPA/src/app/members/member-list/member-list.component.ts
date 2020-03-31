@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { User } from '../../_models/User';
-import { load } from '@angular/core/src/render3';
 import { ActivatedRoute } from '@angular/router';
 
-@Component({
+@ Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.css']

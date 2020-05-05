@@ -33,6 +33,8 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { ListsResolver } from './_resolvers/lists.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
+import { MemberMesssagesComponent } from './members/member-messsages/member-messsages.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -54,6 +56,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       MemberListComponent,
       MemberCardComponent,
       MemberDetailComponent,
+      MemberMesssagesComponent,
       ListsComponent,
       MessagesComponent,
       MemberEditComponent,
@@ -88,6 +91,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       ErrorInterceptorProvider,
       MemberDetailResolver,
       MemberListResolver,
+      MessagesResolver,
       ListsResolver,
       AlertifyService,
       AuthGuard,
